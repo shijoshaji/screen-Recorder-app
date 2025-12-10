@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Screen Recorder - by Shijo</title>
+    <meta name="description"
+        content="Professional screen recorder with optional audio capture. Record your screen with ease.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <svg class="logo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" />
+                    <circle cx="12" cy="12" r="3" fill="currentColor" />
+                </svg>
+                <h1>Screen Recorder</h1>
+            </div>
+            <div class="status-indicator" id="statusIndicator">
+                <span class="status-dot"></span>
+                <span class="status-text">Ready</span>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="recorder-card">
+                <div class="card-header">
+                    <!-- <h2>Start Recording</h2> -->
+                    <p>Capture your screen with optional audio</p>
+                </div>
+
+                <div class="controls-section">
+                    <div class="audio-control">
+                        <label class="checkbox-container">
+                            <input type="checkbox" id="audioCheckbox" checked>
+                            <span class="checkmark"></span>
+                            <span class="checkbox-label">
+                                <svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M12 1C10.34 1 9 2.34 9 4V12C9 13.66 10.34 15 12 15C13.66 15 15 13.66 15 12V4C15 2.34 13.66 1 12 1Z"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                    <path d="M19 10V12C19 15.866 15.866 19 12 19C8.134 19 5 15.866 5 12V10"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                    <path d="M12 19V23" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                    <path d="M8 23H16" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                </svg>
+                                Include Audio
+                            </span>
+                        </label>
+                        <span class="audio-hint">Record system and microphone audio</span>
+                    </div>
+
+                    <div class="button-group">
+                        <button id="startBtn" class="btn btn-primary">
+                            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" />
+                                <circle cx="12" cy="12" r="3" fill="currentColor" />
+                            </svg>
+                            Start Recording
+                        </button>
+                        <button id="stopBtn" class="btn btn-secondary" disabled>
+                            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="6" y="6" width="12" height="12" rx="2" stroke="currentColor"
+                                    stroke-width="2" />
+                            </svg>
+                            Stop Recording
+                        </button>
+                    </div>
+                </div>
+
+                <div class="recording-info" id="recordingInfo">
+                    <div class="recording-timer">
+                        <span class="timer-label">Recording Time:</span>
+                        <span class="timer-value" id="timer">00:00</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="preview-section" id="previewSection">
+                <div class="preview-header">
+                    <h3>Preview</h3>
+                    <button id="downloadBtn" class="btn btn-download" style="display: none;">
+                        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M21 15V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V15"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M7 10L12 15L17 10" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                            <path d="M12 15V3" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                        Download Video
+                    </button>
+                </div>
+                <div class="video-container">
+                    <video id="previewVideo" controls></video>
+                    <div class="empty-state" id="emptyState">
+                        <svg class="empty-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="2" y="3" width="20" height="14" rx="2" stroke="currentColor" stroke-width="2" />
+                            <path d="M8 21H16" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                            <path d="M12 17V21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                        </svg>
+                        <p>No recording yet</p>
+                        <span>Start recording to see your preview here</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <div class="shortcuts-info">
+                <h4>Keyboard Shortcuts</h4>
+                <div class="shortcuts-grid">
+                    <div class="shortcut-item">
+                        <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>R</kbd>
+                        <span>Start/Stop Recording</span>
+                    </div>
+                    <div class="shortcut-item">
+                        <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>A</kbd>
+                        <span>Toggle Audio</span>
+                    </div>
+                    <div class="shortcut-item">
+                        <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>D</kbd>
+                        <span>Download Video</span>
+                    </div>
+                </div>
+            </div>
+            <p class="footer-text">Built with Screen Capture API • Works best on Chrome, Edge, and Firefox</p>
+            <p class="footer-text">Powered by <a href="https://bio.link/shijoshaji" target="_blank">Shijo Shaji</a> ©
+                <span id="currentYear"></span> All rights reserved.
+            </p>
+            <script>
+                document.getElementById('currentYear').textContent = new Date().getFullYear() + 1;
+            </script>
+        </footer>
+    </div>
+
+    <div class="notification" id="notification">
+        <div class="notification-content">
+            <svg class="notification-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" />
+                <path d="M12 8V12" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                <circle cx="12" cy="16" r="1" fill="currentColor" />
+            </svg>
+            <span class="notification-message" id="notificationMessage"></span>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
