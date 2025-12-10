@@ -19,9 +19,9 @@ A modern, professional screen recorder web application with optional audio captu
 
 ## 🚀 Live Demo
 
-Visit the live demo: [Screen Recorder App](https://YOUR_USERNAME.github.io/screen-recorder-app/)
+Visit the live demo: [Screen Recorder App](https://shijoshaji.github.io/screen-recorder-app/)
 
-> **Note**: Replace `YOUR_USERNAME` with your GitHub username after deployment
+> **Note**: Open the live demo in Chrome, Edge, or Firefox.
 
 ## 🎮 Usage
 
