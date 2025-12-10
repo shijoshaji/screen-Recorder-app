@@ -15,21 +15,44 @@ echo Press Ctrl+C to stop the server
 echo ========================================
 echo.
 
-REM Start Python HTTP server
-python -m http.server 8000
-
-REM If Python command fails, try python3
-if errorlevel 1 (
+REM Check if Python is available
+where python >nul 2>&1
+if %errorlevel% equ 0 (
+    echo Using Python...
     echo.
-    echo Python not found. Trying python3...
+    start "" "http://localhost:8000"
+    python -m http.server 8000
+    goto :end
+)
+
+REM Try python3
+where python3 >nul 2>&1
+if %errorlevel% equ 0 (
+    echo Using Python3...
+    echo.
+    start "" "http://localhost:8000"
     python3 -m http.server 8000
+    goto :end
 )
 
-REM If both fail, show error message
-if errorlevel 1 (
+REM Try Node.js as fallback
+where node >nul 2>&1
+if %errorlevel% equ 0 (
+    echo Python not found. Using Node.js instead...
     echo.
-    echo ERROR: Python is not installed or not in PATH
-    echo Please install Python from https://www.python.org/
-    echo.
-    pause
+    start "" "http://localhost:8000"
+    npx -y http-server -p 8000 -o
+    goto :end
 )
+
+REM If all fail, show error message
+echo.
+echo ERROR: No suitable web server found!
+echo.
+echo Please install one of the following:
+echo   - Python: https://www.python.org/
+echo   - Node.js: https://nodejs.org/
+echo.
+pause
+
+:end
