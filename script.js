@@ -46,7 +46,9 @@ async function startRecording() {
                     audio: {
                         echoCancellation: true,
                         noiseSuppression: true,
-                        sampleRate: 44100
+                        autoGainControl: false,
+                        sampleRate: 48000,
+                        channelCount: 2
                     }
                 });
             } catch (audioError) {
@@ -66,7 +68,8 @@ async function startRecording() {
         // Set up MediaRecorder
         const options = {
             mimeType: 'video/webm;codecs=vp9',
-            videoBitsPerSecond: 2500000
+            videoBitsPerSecond: 2500000,
+            audioBitsPerSecond: 128000
         };
 
         // Fallback to vp8 if vp9 is not supported
